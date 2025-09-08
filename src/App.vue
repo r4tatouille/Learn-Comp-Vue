@@ -16,6 +16,16 @@
         <p>Questions</p>
       </div>
     </div>
+    <div class="card">
+      <img
+        src="https://images.unsplash.com/photo-1607706189992-eae578626c86?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29kZXxlbnwwfHwwfHx8MA%3D%3DPr"
+        alt="Programming"
+      />
+      <div class="card-body">
+        <h2>Programming</h2>
+        <p>Questions</p>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -35,7 +45,8 @@ header {
 
 #title {
   font-weight: bold;
-  margin-right: 30px;
+  margin-right: 20px;
+  margin-left: 40px;
 }
 
 #search-input {
@@ -53,9 +64,9 @@ header {
 
 .card {
   width: 270px;
-  margin-right: 30px;
   margin-bottom: 30px;
   border-radius: 5px;
+  margin-left: 40px;
   overflow: hidden;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
