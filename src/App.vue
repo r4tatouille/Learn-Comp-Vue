@@ -1,39 +1,38 @@
-<script setup></script>
+<script setup>
+import { ref, watch } from "vue";
+import srcQuiz from "./data/quizes.json";
 
+const quizes = ref(srcQuiz);
+const search = ref("");
+
+watch(search, () => {
+  quizes.value = srcQuiz.filter((quiz) => {
+    return quiz.title.toLowerCase().includes(search.value.toLowerCase());
+  });
+});
+</script>
 <template>
-  <header>
-    <h1 id="title">QuizVue</h1>
-    <input type="text" id="search-input" />
-  </header>
-  <section id="quiz-container">
-    <div class="card">
-      <img
-        src="https://images.unsplash.com/photo-1607706189992-eae578626c86?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29kZXxlbnwwfHwwfHx8MA%3D%3DPr"
-        alt="Programming"
-      />
-      <div class="card-body">
-        <h2>Programming</h2>
-        <p>Questions</p>
+  <main>
+    <header>
+      <h1 id="title">QuizVue</h1>
+      <input v-model.trim="search" type="text" id="search-input" />
+    </header>
+    <section id="quiz-container">
+      <div v-for="quiz in quizes" :key="quiz.id" class="card">
+        <img :src="quiz.img" :alt="quiz.title" />
+        <div class="card-body">
+          <h2>{{ quiz.title }}</h2>
+          <p>{{ quiz.questions.length }} Questions</p>
+        </div>
       </div>
-    </div>
-    <div class="card">
-      <img
-        src="https://images.unsplash.com/photo-1607706189992-eae578626c86?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29kZXxlbnwwfHwwfHx8MA%3D%3DPr"
-        alt="Programming"
-      />
-      <div class="card-body">
-        <h2>Programming</h2>
-        <p>Questions</p>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 </template>
 
 <style scoped>
 main {
   max-width: 900px;
   margin: 0 auto;
-  align-items: center;
 }
 
 header {
@@ -45,13 +44,12 @@ header {
 
 #title {
   font-weight: bold;
-  margin-right: 20px;
-  margin-left: 40px;
+  margin-right: 30px;
 }
 
 #search-input {
-  background-color: azure;
   border: none;
+  background-color: #c9c9c9a9;
   padding: 10px;
   border-radius: 5px;
 }
@@ -60,29 +58,5 @@ header {
   display: flex;
   flex-wrap: wrap;
   margin-top: 20px;
-}
-
-.card {
-  width: 270px;
-  margin-bottom: 30px;
-  border-radius: 5px;
-  margin-left: 40px;
-  overflow: hidden;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  margin: 0;
-}
-
-.card-body {
-  padding: 20px;
-}
-
-.card-body h2 {
-  font-weight: bold;
 }
 </style>
