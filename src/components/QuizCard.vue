@@ -1,12 +1,19 @@
 <script setup>
+import { defineProps } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 const { quiz } = defineProps(["quiz"]);
-console.log(quiz);
+
+function goToQuiz() {
+  router.push({ name: "quiz", params: { id: quiz.id } });
+}
 </script>
 
 <template>
-  <div class="card">
+  <div class="card" @click="goToQuiz">
     <img :src="quiz.img" alt="quiz.title" />
-    <div class="card-body">
+    <div class="card-text">
       <h2>{{ quiz.title }}</h2>
       <p>{{ quiz.questions.length }} Questions</p>
     </div>
@@ -21,6 +28,7 @@ console.log(quiz);
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
 .card img {
@@ -30,11 +38,8 @@ console.log(quiz);
   margin: 0;
 }
 
-.card-body {
+.card-text {
   padding: 0 15px;
-}
-
-.card-body h2 {
   font-weight: bold;
 }
 </style>
